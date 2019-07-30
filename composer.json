@@ -1,0 +1,43 @@
+{
+    "name": "bhuvidya/craft-cachebust",
+    "description": "Support cachebusting in twig.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "cachebust"
+    ],
+    "support": {
+        "docs": "https://github.com/bhuvidya/craft-cachebust/blob/master/README.md",
+        "issues": "https://github.com/bhuvidya/craft-cachebust/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "bhu Boue vidya",
+            "homepage": "https://github.com/bhuvidya"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "bhuvidya\\cachebust\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "cachebust",
+        "handle": "cachebust",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/bhuvidya/craft-cachebust/master/CHANGELOG.md",
+        "components": {
+            "cacheBustConfig": "bhuvidya\\cachebust\\services\\CacheBustConfig"
+        },
+        "class": "bhuvidya\\cachebust\\Cachebust"
+    }
+}
