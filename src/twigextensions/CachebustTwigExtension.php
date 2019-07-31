@@ -41,6 +41,23 @@ class CachebustTwigExtension extends \Twig_Extension
     }
 
     /**
+     * Returns an array of global variables.
+     *
+     * @return array An array of global variables.
+     */
+
+    public function getGlobals()
+    {
+        return [ 'pooname' => 'bhupoo' ];
+        throw \Exception('shit');
+        $data = Cachebust::getInstance()->cacheBustConfig->getCacheBustData();
+
+        $globals['cacheBust'] = $data ?: [];
+
+        return $globals;
+    }
+
+    /**
      * Returns an array of Twig filters, used in Twig templates via:
      *
      *      {{ 'something' | someFilter }}
@@ -50,7 +67,7 @@ class CachebustTwigExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('someFilter', [$this, 'someInternalFunction']),
+            // new \Twig_SimpleFilter('someFilter', [$this, 'someInternalFunction']),
         ];
     }
 
@@ -64,21 +81,7 @@ class CachebustTwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('someFunction', [$this, 'someInternalFunction']),
+            // new \Twig_SimpleFunction('someFunction', [$this, 'someInternalFunction']),
         ];
-    }
-
-    /**
-     * Our function called via Twig; it can do anything you want
-     *
-     * @param null $text
-     *
-     * @return string
-     */
-    public function someInternalFunction($text = null)
-    {
-        $result = $text . " in the way";
-
-        return $result;
     }
 }

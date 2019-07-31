@@ -15,7 +15,7 @@ use bhuvidya\cachebust\Cachebust;
 use Craft;
 
 /**
- * cachebust Variable
+ * cacheBust Variable
  *
  * Craft allows plugins to provide their own template variables, accessible from
  * the {{ craft }} global variable (e.g. {{ craft.cachebust }}).
@@ -28,29 +28,28 @@ use Craft;
  */
 class CachebustVariable
 {
-    // Public Methods
-    // =========================================================================
-
-    /**
-     * Whatever you want to output to a Twig template can go into a Variable method.
-     * You can have as many variable functions as you want.  From any Twig template,
-     * call it like this:
-     *
-     *     {{ craft.cachebust.exampleVariable }}
-     *
-     * Or, if your variable requires parameters from Twig:
-     *
-     *     {{ craft.cachebust.exampleVariable(twigValue) }}
-     *
-     * @param null $optional
-     * @return string
-     */
-    public function exampleVariable($optional = null)
+    public function data()
     {
-        $result = "And away we go to the Twig template...";
-        if ($optional) {
-            $result = "I'm feeling optional today...";
-        }
-        return $result;
+        return print_r(Cachebust::getInstance()->cacheBustConfig->getCacheBustData(), true);
+    }
+
+    public function js($tag)
+    {
+        return Cachebust::getInstance()->cacheBustConfig->getJS($tag);
+    }
+
+    public function css($tag)
+    {
+        return Cachebust::getInstance()->cacheBustConfig->getCSS($tag);
+    }
+
+    public function img($tag)
+    {
+        return Cachebust::getInstance()->cacheBustConfig->getImg($tag);
+    }
+
+    public function entry($category, $tag)
+    {
+        return Cachebust::getInstance()->cacheBustConfig->getEntry($category, $tag);
     }
 }

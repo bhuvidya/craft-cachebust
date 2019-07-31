@@ -14,6 +14,7 @@ use bhuvidya\cachebust\Cachebust;
 
 use Craft;
 use craft\base\Component;
+use stdClass;
 
 /**
  * CacheBustConfig Service
@@ -30,23 +31,77 @@ use craft\base\Component;
  */
 class CacheBustConfig extends Component
 {
-    // Public Methods
-    // =========================================================================
+    private static $cachebust_data;
+
+
+    public function getCacheBustData($which = null)
+    {
+        return $this->getData();
+    }
+
+
+    public function getJS($tag)
+    {
+        return $this->getEntry('js', $tag);
+    }
+
+    public function getCSS($tag)
+    {
+        return $this->getEntry('css', $tag);
+    }
+
+    public function getImg($tag)
+    {
+        return $this->getEntry('img', $tag);
+    }
+
+    public function getEntry($category, $tag)
+    {
+        if (!$data = $this->getData()) {
+            return false;
+        }
+        if (!$data->{$category}) {
+            return false;
+        }
+
+        foreach ($data->{$category} as $this_tag => $this_file) {
+            if (strcasecmp($tag, $this_tag) === 0) {
+                return $this_file;
+            }
+        }
+        return false;
+    }
+
 
     /**
-     * This function can literally be anything you want, and you can have as many service
-     * functions as you want
+     * get the scss/js/image cachebust info, squash it into one object, and return
      *
-     * From any other plugin file, call it like this:
-     *
-     *     Cachebust::$plugin->cacheBustConfig->exampleService()
-     *
-     * @return mixed
+     * @return object
      */
-    public function exampleService()
-    {
-        $result = 'something';
 
-        return $result;
+    private function getData()
+    {
+        if (static::$cachebust_data) {
+            return static::$cachebust_data;
+        }
+
+        $dir = Craft::$app->path->getSiteTemplatesPath();
+        $data = new stdClass();
+
+        $list = (object) [
+            'css' => 'cachebust.css.json',
+            'js' => 'cachebust.js.json',
+            'img' => 'cachebust.img.json'
+        ];
+
+        foreach ($list as $type => $file) {
+            if (!$info = (array) @json_decode(@file_get_contents($dir . '/' . $file))) {
+                continue;
+            }
+            $data->{$type} = $info;
+        }
+
+        return static::$cachebust_data = $data;
     }
+
 }
