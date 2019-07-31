@@ -80,6 +80,11 @@ class Cachebust extends Plugin
         parent::init();
         self::$plugin = $this;
 
+        // Register Components (Services)
+        $this->setComponents([
+            'cacheBustConfig' => CacheBustConfigService::class,
+        ]);
+
         // Add in our Twig extensions
         Craft::$app->view->registerTwigExtension(new CachebustTwigExtension());
 
@@ -90,7 +95,7 @@ class Cachebust extends Plugin
             function (Event $event) {
                 /** @var CraftVariable $variable */
                 $variable = $event->sender;
-                $variable->set('cachebust', CachebustVariable::class);
+                $variable->set('cacheBust', CachebustVariable::class);
             }
         );
 
