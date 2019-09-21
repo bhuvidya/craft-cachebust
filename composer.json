@@ -30,8 +30,8 @@
         }
     },
     "extra": {
-        "name": "cacheBust",
-        "handle": "cacheBust",
+        "name": "Cache Buster",
+        "handle": "cachebust",
         "hasCpSettings": false,
         "hasCpSection": false,
         "changelogUrl": "https://raw.githubusercontent.com/bhuvidya/craft-cachebust/master/CHANGELOG.md",

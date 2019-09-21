@@ -21,5 +21,5 @@
  * @since     1.0.0
  */
 return [
-    'cachebust plugin loaded' => 'cachebust plugin loaded',
+    'Cache Buster plugin loaded' => 'Cache Buster plugin loaded',
 ];
