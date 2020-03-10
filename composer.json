@@ -2,7 +2,7 @@
     "name": "bhuvidya/craft-cachebust",
     "description": "Support cachebusting in twig.",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "keywords": [
         "craft",
         "cms",
@@ -30,8 +30,8 @@
         }
     },
     "extra": {
-        "name": "cacheBust",
-        "handle": "cacheBust",
+        "name": "Cache Buster",
+        "handle": "cachebust",
         "hasCpSettings": false,
         "hasCpSection": false,
         "changelogUrl": "https://raw.githubusercontent.com/bhuvidya/craft-cachebust/master/CHANGELOG.md",
